@@ -26,4 +26,47 @@
     AUTOPING=~/tmp/autoping
     JAVA_RT=~/opt/java/jdk/jre/lib/rt.jar
 
-这两个环境变量，AUTOPING 就写你解压的目录，"JAVA_RT" 你需要
+这两个环境变量，AUTOPING 就写你解压的目录，"JAVA\_RT" 你需要指明
+Java 的运行库位置，通常在你安装的 JDK 或者 JRE 的 lib 目录下就能找到
+
+## 如何修改配置文件
+
+下面给出 conf/autoping.properties 文件的具体字段的含义
+
+    #----------------------------------------------------------
+    # 下面三个域名将被定期 ping，一行一个，可以无数个
+    # 不过太多，你内存可能会爆掉
+    hosts:
+    wx.redatoms.com
+    sg.redatoms.com
+    wsa.sg13-bj.redatoms.com
+    #~ End of hosts
+    #----------------------------------------------------------
+    # 多长时间监视一次，5 表示五分钟
+    watch-interval=5
+    #----------------------------------------------------------
+    # 在 ping 期间，主线程会不断检查是否所有 ping 都返回了
+    # 这个检查稍微有点耗资源，因此建议 3 秒检查一次
+    check-interval=3
+    #----------------------------------------------------------
+    # 结果文件存储的主目录
+    data-home=~/tmp/autoping
+    #----------------------------------------------------------
+    # 下面这些属性是用来解析用的正则表达式啥的，请不要修改
+    #----------------------------------------------------------
+    # the URL pattern for get ping
+    url-prefix=http://cloudmonitor.ca.com/en/
+    url-ping=ping.php?varghost=${host}&vhost=_&vaction=ping&ping=start
+    #----------------------------------------------------------
+    p-ajax-prefix=xmlreqGET('api/pingproxy.php?
+    p-ajax=^(xmlreqGET[(]')(api/pingproxy[.]php.*)('.*')([0-9]+)(.*)$
+    #----------------------------------------------------------
+    p-td-prefix=<td class="right-dotted-border"
+    p-td:
+    ^(.*<td class="right-dotted-border".*><span id="cp)([0-9]+)(">Checking...</span>.*)$
+    #~ End p-td
+    #----------------------------------------------------------
+    p-title:
+    ^(<.*>)(.*)(:)(</td>.*)$
+    #~ End p-title
+
