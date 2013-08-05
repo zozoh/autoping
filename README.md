@@ -21,9 +21,9 @@
 > 下载程序后，你可以解压到你的任意目录，不过你需要修改运行脚本
 > 的一个变量，用来指明自己的安装路径。
 
-> 如果你是 Linux 用户，打开 bin/autoping 文件，修改
+如果你是 Linux 用户，打开 bin/autoping 文件，修改
 
     AUTOPING=~/tmp/autoping
     JAVA_RT=~/opt/java/jdk/jre/lib/rt.jar
 
-> 这两个环境变量，AUTOPING 就写你解压的目录，"JAVA__RT" 你需要
+这两个环境变量，AUTOPING 就写你解压的目录，"JAVA_RT" 你需要
