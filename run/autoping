@@ -1,0 +1,22 @@
+#!/bin/bash
+# define autoping application home here
+# you can found 
+#  [bin]
+#  [jars]
+#  [conf]
+# folder in this path
+AUTOPING=~/tmp/autoping
+#
+# define JAVA Runtime jar
+#
+JAVA_RT=~/opt/java/jdk/jre/lib/rt.jar
+
+# export java classpath
+export CLASSPATH=.:$JAVA_RT
+export CLASSPATH=$CLASSPATH:$AUTOPING/conf
+export CLASSPATH=$CLASSPATH:$AUTOPING/jars/autoping.jar
+export CLASSPATH=$CLASSPATH:$AUTOPING/jars/nutz.jar
+export CLASSPATH=$CLASSPATH:$AUTOPING/jars/log4j.jar
+
+# run application
+java zzh.AutoPing
