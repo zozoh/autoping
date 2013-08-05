@@ -29,6 +29,10 @@
 这两个环境变量，AUTOPING 就写你解压的目录，"JAVA\_RT" 你需要指明
 Java 的运行库位置，通常在你安装的 JDK 或者 JRE 的 lib 目录下就能找到
 
+如果你是 Woindows 用户，请打开 bin/autoping.bat，进行相应修改
+
+然后你需要修改配置文件，具体如何修改，请参看下面一节
+
 ## 如何修改配置文件
 
 下面给出 conf/autoping.properties 文件的具体字段的含义
