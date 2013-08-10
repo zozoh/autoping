@@ -27,20 +27,20 @@ public class AutoPingAtom implements Atom {
     // 请求完毕的结果
     private String result;
 
-    // 运行线程，如果设置了，就启动
-    private Thread thread;
+    private boolean submit;
 
     public AutoPingAtom(String displayName, String url) {
         this.displayName = displayName;
         this.url = url;
+        this.submit = false;
     }
 
-    public void appendThread() {
-        if (null == thread) {
-            log.debugf(" - atom live : %d : %s", getCpid(), getCpTitle());
-            thread = new Thread(this);
-            thread.start();
-        }
+    public boolean isSubmit() {
+        return submit;
+    }
+
+    public void setSubmit(boolean submit) {
+        this.submit = submit;
     }
 
     @Override
@@ -51,17 +51,15 @@ public class AutoPingAtom implements Atom {
                 Response re = Http.get(url);
                 // 如果请求成功
                 if (re.isOK()) {
-                    // String str = Strings.trim(re.getContent());
-                    // if
-                    // (!str.equalsIgnoreCase("Monitoring station temporarily not available"))
-                    // {
-                    // result = str;
-                    // } else {
-                    // // 占用资源太多... 休息 1s
-                    // log.debugf("wait 1s for: %s", str);
-                    // Lang.sleep(1000);
-                    // }
-                    result = Strings.trim(re.getContent());
+                    String str = Strings.trim(re.getContent());
+                    // 空内容，错误
+                    if (Strings.isBlank(str)) {
+                        result = "!Blank result";
+                    }
+                    //
+                    else {
+                        result = str;
+                    }
                 }
                 // 如果请求失败
                 else {

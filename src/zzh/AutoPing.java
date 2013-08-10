@@ -100,7 +100,13 @@ public class AutoPing {
                         if (atom.isDone()) {
                             allDone &= true;
                             doneCount++;
-                        }else{
+                            if (atom.isError()) {
+                                log.warnf("!!! %s : %s : %s",
+                                          atom.getDisplayName(),
+                                          atom.getCpid(),
+                                          atom.getResult());
+                            }
+                        } else {
                             allDone = false;
                         }
                     }
@@ -139,6 +145,7 @@ public class AutoPing {
             log.info(Strings.dup('~', 80));
             log.info("clean atoms");
             c.setAtoms(null);
+            System.gc();
 
             // 全部搞定，睡一下
             log.infof("sleep %d ms", c.getWatchInterval());

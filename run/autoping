@@ -5,11 +5,11 @@
 #  [jars]
 #  [conf]
 # folder in this path
-AUTOPING=~/tmp/autoping
+AUTOPING=/danoo/content/zzh/autoping
 #
 # define JAVA Runtime jar
 #
-JAVA_RT=~/opt/java/jdk/jre/lib/rt.jar
+JAVA_RT=/danoo/content/jdk/lib/rt.jar
 
 # export java classpath
 export CLASSPATH=.:$JAVA_RT
@@ -18,5 +18,8 @@ export CLASSPATH=$CLASSPATH:$AUTOPING/jars/autoping.jar
 export CLASSPATH=$CLASSPATH:$AUTOPING/jars/nutz.jar
 export CLASSPATH=$CLASSPATH:$AUTOPING/jars/log4j.jar
 
+export JAVA_OPTS="-Xms256m -Xmx512m -Djava.awt.headless=true"
+
 # run application
-java zzh.AutoPing
+nohup java $JAVA_OPTS zzh.AutoPing 
+#java $JAVA_OPTS zzh.AutoPing
